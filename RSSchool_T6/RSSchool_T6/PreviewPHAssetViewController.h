@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class PHAsset;
+@class AVPlayer;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PHAsset *phAsset;
 @property (nonatomic, strong) UIButton *doneButton;
 @property (nonatomic, strong) UIImageView *imageView;
+@property (strong, nonatomic) AVPlayer *avPlayer;
 
 @end
 
