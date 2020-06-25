@@ -154,9 +154,4 @@ static CGFloat const kButtonHeight = 55;
     [self.shapes animateShapes];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [self.shapes stopShapesAnimation];
-    [super viewDidDisappear:animated];
-}
-
 @end

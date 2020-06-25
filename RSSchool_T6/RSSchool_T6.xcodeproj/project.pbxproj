@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CA748AEF24A376AD0022325F /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAAEAB8824A36CA9002C733F /* Photos.framework */; };
 		CA748AFC24A389980022325F /* PHAssetTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA748AFA24A389980022325F /* PHAssetTableCell.m */; };
 		CA748B0124A3DDBA0022325F /* PHAssetCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA748B0024A3DDBA0022325F /* PHAssetCollectionCell.m */; };
 		CA748B0424A3F3140022325F /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA748B0324A3F3140022325F /* DetailsViewController.m */; };
@@ -61,7 +60,6 @@
 		CAAEAB7F24A0D2B2002C733F /* InfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		CAAEAB8124A0F845002C733F /* ShapesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShapesView.h; sourceTree = "<group>"; };
 		CAAEAB8224A0F845002C733F /* ShapesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShapesView.m; sourceTree = "<group>"; };
-		CAAEAB8824A36CA9002C733F /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +67,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA748AEF24A376AD0022325F /* Photos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,7 +113,6 @@
 			children = (
 				CA7E667B249C0B4A00D521C0 /* RSSchool_T6 */,
 				CA7E667A249C0B4A00D521C0 /* Products */,
-				CAAEAB8724A36CA9002C733F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,7 +127,6 @@
 		CA7E667B249C0B4A00D521C0 /* RSSchool_T6 */ = {
 			isa = PBXGroup;
 			children = (
-				CA7E668D249C0B4F00D521C0 /* Info.plist */,
 				CA748AFE24A3BB910022325F /* Support */,
 				CAAEAB8124A0F845002C733F /* ShapesView.h */,
 				CAAEAB8224A0F845002C733F /* ShapesView.m */,
@@ -147,6 +142,7 @@
 				CA748AF024A3874E0022325F /* Cells */,
 				CA748B0824A4A3160022325F /* Categories */,
 				CA7E6688249C0B4F00D521C0 /* Assets.xcassets */,
+				CA7E668D249C0B4F00D521C0 /* Info.plist */,
 			);
 			path = RSSchool_T6;
 			sourceTree = "<group>";
@@ -162,14 +158,6 @@
 				CAAEAB7F24A0D2B2002C733F /* InfoViewController.m */,
 			);
 			path = Tabs;
-			sourceTree = "<group>";
-		};
-		CAAEAB8724A36CA9002C733F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				CAAEAB8824A36CA9002C733F /* Photos.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -390,7 +378,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X72RL872QP;
 				INFOPLIST_FILE = RSSchool_T6/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -408,7 +396,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X72RL872QP;
 				INFOPLIST_FILE = RSSchool_T6/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

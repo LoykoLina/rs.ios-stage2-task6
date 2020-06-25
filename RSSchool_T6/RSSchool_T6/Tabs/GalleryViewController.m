@@ -20,19 +20,25 @@
     [super viewDidLoad];
     
     [self.collectionView registerClass:PHAssetCollectionCell.class forCellWithReuseIdentifier:@"PHAssetCollectionCellId"];
+    
     [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            switch (status) {
-                case PHAuthorizationStatusAuthorized:
-                    [PHPhotoLibrary.sharedPhotoLibrary registerChangeObserver:self];
-                    [self getItemsFromGallery];
-                    [self.collectionView reloadData];
-                    break;
-                default:
-                    [self showNoPhotoAccessAlert];
-                    break;
+        switch (status) {
+            case PHAuthorizationStatusAuthorized: {
+                [PHPhotoLibrary.sharedPhotoLibrary registerChangeObserver:self];
+                __weak typeof(self) weakSelf = self;
+                dispatch_queue_t queue = dispatch_get_global_queue(QOS_CLASS_UTILITY, 0);
+                dispatch_async(queue, ^{
+                    [weakSelf getItemsFromGallery];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf.collectionView reloadData];
+                    });
+                });
+                break;
             }
-        });
+            default:
+                [self showNoPhotoAccessAlert];
+                break;
+        }
     }];
     
 }
@@ -59,11 +65,11 @@
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
     if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusAuthorized) {
         [PHPhotoLibrary.sharedPhotoLibrary unregisterChangeObserver:self];
     }
-    
-    [super viewDidDisappear:animated];
 }
 
 - (void)showNoPhotoAccessAlert {
@@ -111,9 +117,13 @@
 @implementation GalleryViewController (PhotoLibraryChangeObserver)
 
 - (void)photoLibraryDidChange:(PHChange *)changeInstance {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self getItemsFromGallery];
-        [self.collectionView reloadData];
+    __weak typeof(self) weakSelf = self;
+    dispatch_queue_t queue = dispatch_get_global_queue(QOS_CLASS_UTILITY, 0);
+    dispatch_async(queue, ^{
+        [weakSelf getItemsFromGallery];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.collectionView reloadData];
+        });
     });
 }
 

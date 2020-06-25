@@ -84,33 +84,35 @@ static CGFloat const kStackViewSpacing = 42;
 }
 
 - (void)animatePulsingCircle {
-    [UIView animateWithDuration:1.2 delay:0 options:(UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat) animations:^{
-        [self.circle setTransform:CGAffineTransformScale(self.circle.transform, 0.9, 0.9)];
-        self.circle.transform = CGAffineTransformIdentity;
-        [self.circle setTransform:CGAffineTransformScale(self.circle.transform, 1.1, 1.1)];
-    } completion: ^(BOOL completed){
-        [self animatePulsingCircle];
-    }];
+    CGAffineTransform originTransform = self.circle.transform;
+    
+    [UIView animateWithDuration:1.5 delay:0 options:(UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat) animations:^{
+            [self.circle setTransform:CGAffineTransformScale(originTransform, 0.9, 0.9)];
+        } completion:nil];
+    
+    [UIView animateWithDuration:1.5 delay:0 options:(UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat) animations:^{
+            [self.circle setTransform:CGAffineTransformScale(originTransform, 1.1, 1.1)];
+        } completion:nil];
 }
 
 - (void)animateRotatingTriangle {
-    [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-        [self.triangle setTransform:CGAffineTransformRotate(self.triangle.transform, M_PI_4 / 2)];
-    }completion: ^(BOOL completed){
+    [UIView animateWithDuration:6 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        [self.triangle setTransform:CGAffineTransformRotate(self.triangle.transform, M_PI)];
+    } completion: ^(BOOL completed){
         [self animateRotatingTriangle];
     }];
 }
 
 - (void)animateMovingSquare {
-    CGFloat originY = self.square.layer.position.y;
+    CGFloat originY = self.square.center.y;
+    
+    [UIView animateWithDuration:1.2 delay:0 options:(UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat) animations:^{
+        self.square.center = CGPointMake(self.square.center.x, originY + self.square.bounds.size.width * 0.1);
+    } completion:nil];
+    
     [UIView animateWithDuration:1 delay:0 options:(UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat) animations:^{
         self.square.layer.position = CGPointMake(self.square.layer.position.x, originY - self.square.frame.size.width * 0.1);
-        self.square.layer.position = CGPointMake(self.square.layer.position.x, originY);
-        self.square.layer.position = CGPointMake(self.square.layer.position.x, originY + self.square.frame.size.width * 0.1);
-    } completion: ^(BOOL completed){
-        self.square.layer.position = CGPointMake(self.square.layer.position.x, originY);
-        [self animateMovingSquare];
-    }];
+    } completion:nil];
 }
 
 - (void)animateShapes {

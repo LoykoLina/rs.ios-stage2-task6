@@ -25,8 +25,14 @@
     
     if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusAuthorized) {
         [PHPhotoLibrary.sharedPhotoLibrary registerChangeObserver:self];
-        [self getItemsFromGallery];
-        [self.tableView reloadData];
+        __weak typeof(self) weakSelf = self;
+        dispatch_queue_t queue = dispatch_get_global_queue(QOS_CLASS_UTILITY, 0);
+        dispatch_async(queue, ^{
+            [weakSelf getItemsFromGallery];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.tableView reloadData];
+            });
+        });
     }
 }
 
@@ -58,16 +64,10 @@
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
     if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusAuthorized) {
         [PHPhotoLibrary.sharedPhotoLibrary unregisterChangeObserver:self];
     }
-    
-    [super viewDidDisappear:animated];
-}
-
-- (void)reloadData {
-    [self getItemsFromGallery];
-    [self.tableView reloadData];
 }
 
 @end
@@ -103,9 +103,13 @@
 @implementation InfoViewController (PhotoLibraryChangeObserver)
 
 - (void)photoLibraryDidChange:(PHChange *)changeInstance {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self getItemsFromGallery];
-        [self.tableView reloadData];
+    __weak typeof(self) weakSelf = self;
+    dispatch_queue_t queue = dispatch_get_global_queue(QOS_CLASS_UTILITY, 0);
+    dispatch_async(queue, ^{
+        [weakSelf getItemsFromGallery];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.tableView reloadData];
+        });
     });
 }
 

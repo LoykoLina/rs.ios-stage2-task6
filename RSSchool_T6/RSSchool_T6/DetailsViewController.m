@@ -189,6 +189,7 @@ static CGFloat const kButtonHeight = 55;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
     CGFloat newHeight;
     
@@ -200,8 +201,6 @@ static CGFloat const kButtonHeight = 55;
     
     [self.contentView.heightAnchor constraintEqualToConstant:newHeight].active = YES;
     self.scrollView.contentSize = self.contentView.bounds.size;
-    
-    [super viewDidAppear:animated];
 }
 
 @end

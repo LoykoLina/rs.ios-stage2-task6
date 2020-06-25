@@ -82,10 +82,10 @@ static CGFloat const kEdjeInsets = 5;
         [self.imageView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-kEdjeInsets]
     ]];
     if (@available(iOS 11.0, *)) {
-        [self.doneButton.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor
+        [self.imageView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor
                                                   constant:2 * kEdjeInsets + kButtonHeight].active = YES;
     } else {
-        [self.doneButton.topAnchor constraintEqualToAnchor:self.topLayoutGuide.topAnchor
+        [self.imageView.topAnchor constraintEqualToAnchor:self.topLayoutGuide.topAnchor
                                                   constant:2 * kEdjeInsets + kButtonHeight].active = YES;
     }
 }

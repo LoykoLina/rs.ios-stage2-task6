@@ -92,9 +92,4 @@ static CGFloat const kButtonCenterOffset = 170;
     [self.shapes animateShapes];
 }
 
-- (void) viewDidDisappear:(BOOL)animated {
-    [self.shapes stopShapesAnimation];
-    [super viewDidDisappear:animated];
-}
-
 @end
